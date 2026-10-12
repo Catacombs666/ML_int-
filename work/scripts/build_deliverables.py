@@ -68,6 +68,7 @@ def code(s):return {'cell_type':'code','metadata':{},'source':s,'execution_count
 def notebook(name,title,blocks):
     cells=[md('# '+title+'\n\n[Open in Colab](https://colab.research.google.com/github/Catacombs666/ML_int-/blob/main/work/notebooks/'+name+')\n\n'+common_credit),code(setup)]
     for heading,prose,src in blocks:cells.extend([md('## '+heading+'\n\n'+prose),code(src)])
+    for i,c in enumerate(cells): c['id']=f'cell-{i:02d}'
     n={'cells':cells,'metadata':{'kernelspec':{'display_name':'Python 3','language':'python','name':'python3'},'language_info':{'name':'python','version':R['versions']['python']}},'nbformat':4,'nbformat_minor':5}
     (ROOT/'work/notebooks'/name).write_text(json.dumps(n,indent=1)+'\n')
 notebook('w01_research_question.ipynb','ML-02 — CTR opportunity research question',[
