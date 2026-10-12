@@ -1,0 +1,164 @@
+{
+  "author": "Majhabul Hoque",
+  "seed": 42,
+  "rows": 30000,
+  "proxy_label": "trend_direction equals down; contemporaneous, not future",
+  "comparison": [
+    {
+      "split": "client_holdout",
+      "features": "base",
+      "depth": 2,
+      "test_rows": 6163,
+      "test_positive_rate": 0.5109524582184002,
+      "roc_auc": 0.5847352452606582,
+      "average_precision": 0.5591260052191263,
+      "precision_at_20": 0.7,
+      "precision_at_50": 0.72
+    },
+    {
+      "split": "client_holdout",
+      "features": "base",
+      "depth": 3,
+      "test_rows": 6163,
+      "test_positive_rate": 0.5109524582184002,
+      "roc_auc": 0.5912335005709568,
+      "average_precision": 0.5666123995684235,
+      "precision_at_20": 0.7,
+      "precision_at_50": 0.66
+    },
+    {
+      "split": "client_holdout",
+      "features": "base",
+      "depth": 4,
+      "test_rows": 6163,
+      "test_positive_rate": 0.5109524582184002,
+      "roc_auc": 0.5804304691791857,
+      "average_precision": 0.5672204667358614,
+      "precision_at_20": 0.55,
+      "precision_at_50": 0.62
+    },
+    {
+      "split": "client_holdout",
+      "features": "drop_impressions_add_engagement",
+      "depth": 2,
+      "test_rows": 6163,
+      "test_positive_rate": 0.5109524582184002,
+      "roc_auc": 0.5470269155710947,
+      "average_precision": 0.5363176577380323,
+      "precision_at_20": 0.55,
+      "precision_at_50": 0.6
+    },
+    {
+      "split": "client_holdout",
+      "features": "drop_impressions_add_engagement",
+      "depth": 3,
+      "test_rows": 6163,
+      "test_positive_rate": 0.5109524582184002,
+      "roc_auc": 0.5341623182004673,
+      "average_precision": 0.5353528755148109,
+      "precision_at_20": 0.5,
+      "precision_at_50": 0.64
+    },
+    {
+      "split": "client_holdout",
+      "features": "drop_impressions_add_engagement",
+      "depth": 4,
+      "test_rows": 6163,
+      "test_positive_rate": 0.5109524582184002,
+      "roc_auc": 0.5202317205849784,
+      "average_precision": 0.5221761628630803,
+      "precision_at_20": 0.35,
+      "precision_at_50": 0.46
+    },
+    {
+      "split": "client_holdout",
+      "features": "hand_rule",
+      "depth": 0,
+      "test_rows": 6163,
+      "test_positive_rate": 0.5109524582184002,
+      "roc_auc": 0.5,
+      "average_precision": 0.5109524582184002,
+      "precision_at_20": 0.8,
+      "precision_at_50": 0.7
+    },
+    {
+      "split": "row_random",
+      "features": "base",
+      "depth": 2,
+      "test_rows": 6000,
+      "test_positive_rate": 0.542,
+      "roc_auc": 0.6351369709111938,
+      "average_precision": 0.6203393435756213,
+      "precision_at_20": 0.5,
+      "precision_at_50": 0.6
+    },
+    {
+      "split": "row_random",
+      "features": "base",
+      "depth": 3,
+      "test_rows": 6000,
+      "test_positive_rate": 0.542,
+      "roc_auc": 0.6608170584980959,
+      "average_precision": 0.642627906090974,
+      "precision_at_20": 0.7,
+      "precision_at_50": 0.62
+    },
+    {
+      "split": "row_random",
+      "features": "base",
+      "depth": 4,
+      "test_rows": 6000,
+      "test_positive_rate": 0.542,
+      "roc_auc": 0.6748293178892487,
+      "average_precision": 0.6576558280466274,
+      "precision_at_20": 0.85,
+      "precision_at_50": 0.76
+    },
+    {
+      "split": "row_random",
+      "features": "drop_impressions_add_engagement",
+      "depth": 2,
+      "test_rows": 6000,
+      "test_positive_rate": 0.542,
+      "roc_auc": 0.6215592218695113,
+      "average_precision": 0.61172879273735,
+      "precision_at_20": 0.45,
+      "precision_at_50": 0.54
+    },
+    {
+      "split": "row_random",
+      "features": "drop_impressions_add_engagement",
+      "depth": 3,
+      "test_rows": 6000,
+      "test_positive_rate": 0.542,
+      "roc_auc": 0.6407646240763719,
+      "average_precision": 0.6293007359722059,
+      "precision_at_20": 0.75,
+      "precision_at_50": 0.72
+    },
+    {
+      "split": "row_random",
+      "features": "drop_impressions_add_engagement",
+      "depth": 4,
+      "test_rows": 6000,
+      "test_positive_rate": 0.542,
+      "roc_auc": 0.6548782095353706,
+      "average_precision": 0.6464649405328807,
+      "precision_at_20": 0.65,
+      "precision_at_50": 0.64
+    },
+    {
+      "split": "row_random",
+      "features": "hand_rule",
+      "depth": 0,
+      "test_rows": 6000,
+      "test_positive_rate": 0.542,
+      "roc_auc": 0.5003075030750308,
+      "average_precision": 0.5422816728167283,
+      "precision_at_20": 0.4,
+      "precision_at_50": 0.58
+    }
+  ],
+  "leaky_control_roc_auc": 0.9998108751727675,
+  "group_client_overlap": 0
+}
