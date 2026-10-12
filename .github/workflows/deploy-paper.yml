@@ -1,0 +1,29 @@
+name: Deploy capstone paper to GitHub Pages
+on:
+  push:
+    branches: [main]
+    paths: ['work/paper/**', '.github/workflows/deploy-paper.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: capstone-pages
+  cancel-in-progress: false
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - name: Upload the public paper only
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: work/paper
+      - name: Deploy paper
+        id: deployment
+        uses: actions/deploy-pages@v4
