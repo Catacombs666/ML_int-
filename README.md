@@ -1,5 +1,12 @@
 # FlyRank ML Internship — Starter Repo
 
+## Completed capstone: CTR opportunity scoring
+
+[Read the public research paper](https://samir-flyrank-ctr-capstone.samirhossain436.chatgpt.site) · [Executed capstone notebook](work/notebooks/capstone.ipynb) · [Measured metrics](work/outputs/ctr_metrics.json)
+
+A grouped Random Forest reference reduces impression-weighted CTR error by 15.5% versus a position-band baseline on six held-out clients. The 20 reason-coded recommendations support human review; reference gaps are not estimates of recoverable clicks. This core lane uses the permitted real FlyRank anonymized starter snapshot. All ten weekly/capstone notebooks are executed. See [work/README.md](work/README.md) for the complete reproducibility path. The submission is this repository URL; the exact paper URL is recorded in `submission/paper_url.txt`.
+
+
 **Applied Search Intelligence: Google Search Ranking & Discoverability**
 
 This is the starting point for the FlyRank ML Internship. You **clone it into your own public
@@ -145,3 +152,4 @@ build on — and the `skills/` folder here is the instruction library for your A
 ---
 
 *Track leads: Mirza Ašćerić (ML) · Hole (data engineering). Code under MIT (see `LICENSE`); data under `DATA_USE.md`.*
+

@@ -1,60 +1,47 @@
-# work/ — your space
+# Completed CTR opportunity capstone
 
-Everything you build lives here: lane experiments, notebooks, figures, and your capstone
-report. The rest of the repo is the shared reference; this folder is yours.
+Question: which visible pages merit a human click-capture review after position and safe metadata are considered?
 
-## Rules of the road
+Lane: **CTR / Engagement Opportunity Scoring**. The internship lane guide explicitly permits the bundled anonymized starter snapshot. This study is cross-sectional, not a future-growth forecast.
 
-1. **Copy, don't edit.** Need to change the pipeline? Copy the script here
-   (e.g. `work/scripts/03_train_model_v2.py`) or adjust the feature lists in
-   `scripts/ml_utils.py`. The reference pipeline in `scripts/` stays pristine — it's the
-   baseline you compare against, and reviewers expect to find it unchanged.
-2. **No datasets in git.** CSVs inside `work/` are gitignored, and CI fails if any dataset
-   CSV is committed anywhere in the repo. Small summary tables belong in your report as
-   markdown, not as data files. Metrics JSONs are the opposite: keep files like
-   `work/outputs/*.json` **committed** — they are the receipts your report's numbers trace
-   back to. Don't add ignore rules that hide them.
-3. **Stay reproducible.** Fix your random seeds and note them in your report. Someone with a
-   fresh clone should be able to re-run your work from your instructions alone.
-4. **Public-safety language.** Everything here may end up public with your submission:
-   observed / measured / directional / decision-support — no client-identifying details,
-   no causal claims without a design (see `DATA_USE.md`).
+## Run from a fresh clone
 
-## Suggested layout
-
-```text
-work/
-  notebooks/            your experiment notebooks
-  scripts/              copied + modified pipeline pieces
-  figures/              charts for your report
-  capstone_report.md    your capstone write-up (start from the template)
+```bash
+python -m pip install -r work/requirements.txt
+python work/scripts/ctr_capstone.py
+python work/scripts/build_deliverables.py
+python work/scripts/run_notebooks.py
+python work/scripts/verify_submission.py
 ```
 
-## Capstone
+The Python-only notebook runner executes each cell in order and records actual text outputs. Colab/Jupyter Run All executes the same cells; a fresh Colab session automatically clones this repository if needed and installs the pinned work dependencies. Run the notebook runner after rebuilding notebook templates, because rebuilding intentionally resets their outputs.
 
-Copy `capstone_report_template.md` to `capstone_report.md` and fill it in as you go — it
-mirrors the eight axes your work is graded on, so writing it early keeps you honest.
+## Assignment index
 
-## Your assignment index
+All ten notebooks were executed top to bottom; completed outputs are committed.
 
-Your skeleton notebooks are already in `notebooks/` — one per assignment, pre-named.
-Tick them off as you go; this table is the map of your work (each badge opens the notebook
-in Colab, straight from your repo):
+| Notebook | Assignment | Status |
+|---|---|---|
+| [Research question](notebooks/w01_research_question.ipynb) | ML-02 | Executed |
+| [Task framing](notebooks/w02_ml_task_framing.ipynb) | ML-03 | Executed |
+| [Data contract](notebooks/w03_data_contract.ipynb) | ML-04 | Executed |
+| [Feature leakage checks](notebooks/w03_feature_leakage_check.ipynb) | ML-05 optional | Executed |
+| [Signal audit](notebooks/w04_signal_audit.ipynb) | ML-06 optional | Executed |
+| [Baseline and score](notebooks/w04_baseline_score.ipynb) | ML-07 | Executed |
+| [Model](notebooks/w05_model.ipynb) | ML-08 | Executed |
+| [Validation audit](notebooks/w06_validation_audit.ipynb) | ML-09 | Executed |
+| [Action playbook](notebooks/w07_action_playbook.ipynb) | ML-10 | Executed |
+| [Capstone](notebooks/capstone.ipynb) | ML-11 + ML-12 closing cells | Executed |
 
-| Notebook | Assignment | Open | Status |
-|---|---|---|---|
-| `notebooks/w01_research_question.ipynb` | ML-02 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Catacombs666/ML_int-/blob/main/work/notebooks/w01_research_question.ipynb?flush_cache=true) | ☐ |
-| `notebooks/w02_ml_task_framing.ipynb` | ML-03 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Catacombs666/ML_int-/blob/main/work/notebooks/w02_ml_task_framing.ipynb?flush_cache=true) | ☐ |
-| `notebooks/w03_data_contract.ipynb` | ML-04 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Catacombs666/ML_int-/blob/main/work/notebooks/w03_data_contract.ipynb?flush_cache=true) | ☐ |
-| `notebooks/w03_feature_leakage_check.ipynb` | ML-05 — optional stretch (card retired 2026-07-13; its core lives in ML-04 now) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Catacombs666/ML_int-/blob/main/work/notebooks/w03_feature_leakage_check.ipynb?flush_cache=true) | optional |
-| `notebooks/w04_signal_audit.ipynb` | ML-06 — optional stretch (card retired 2026-07-13; its core lives in ML-07 now) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Catacombs666/ML_int-/blob/main/work/notebooks/w04_signal_audit.ipynb?flush_cache=true) | optional |
-| `notebooks/w04_baseline_score.ipynb` | ML-07 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Catacombs666/ML_int-/blob/main/work/notebooks/w04_baseline_score.ipynb?flush_cache=true) | ☐ |
-| `notebooks/w05_model.ipynb` | ML-08 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Catacombs666/ML_int-/blob/main/work/notebooks/w05_model.ipynb?flush_cache=true) | ☐ |
-| `notebooks/w06_validation_audit.ipynb` | ML-09 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Catacombs666/ML_int-/blob/main/work/notebooks/w06_validation_audit.ipynb?flush_cache=true) | ☐ |
-| `notebooks/w07_action_playbook.ipynb` | ML-10 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Catacombs666/ML_int-/blob/main/work/notebooks/w07_action_playbook.ipynb?flush_cache=true) | ☐ |
-| `notebooks/capstone.ipynb` | ML-11 (the paper mirrors it) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Catacombs666/ML_int-/blob/main/work/notebooks/capstone.ipynb?flush_cache=true) | ☐ |
-| closing section of `notebooks/capstone.ipynb` | ML-12 — 5-min demo outline + social-post cut + employer-facing summary | (same notebook, last markdown cells) | ☐ |
+## Artifacts and boundaries
 
-When your paper is deployed, put its exact URL in `../submission/paper_url.txt` (one line).
-ML-12 lives in your capstone notebook's closing markdown cells — it's the smallest card and
-the easiest to forget, which is exactly why it has a row here.
+- `outputs/ctr_metrics.json`: aggregate metrics, provenance, diagnostics and limited derived recommendations; no raw exports or client identities.
+- `figures/`: aggregate charts.
+- `paper/`: public research paper source and its relative assets.
+- `scripts/`: all custom implementation; the repository's root `scripts/` reference pipeline is unchanged.
+- `.cache/review_queue.csv`: regenerated local mapping from generic review IDs to pseudonymous content items. It is ignored by git and never published.
+- `../submission/paper_url.txt`: exact live paper URL, one line.
+
+Observed reference shortfalls support human review. They do not measure recoverable clicks, future CTR, or causal refresh impact. The original solar-themed framing and generic dummy drafts are retained in repository history; the current assignment sequence is aligned to real FlyRank data.
+
+Built on the FlyRank ML Internship dataset — https://flyrank.ai.

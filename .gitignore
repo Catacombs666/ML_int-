@@ -34,3 +34,8 @@ __pycache__/
 .venv/
 venv/
 .env
+
+
+# Capstone: local row-level mapping is never a public artifact.
+work/.cache/
+work/scripts/__pycache__/

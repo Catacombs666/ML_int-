@@ -1,0 +1,42 @@
+name: Capstone reproducibility
+on:
+  push:
+    branches: [main]
+    paths: ['work/**', 'submission/**', '.github/workflows/capstone-checks.yml']
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    env:
+      OPENBLAS_NUM_THREADS: '2'
+      OMP_NUM_THREADS: '2'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: work/requirements.txt
+      - run: python -m pip install -r work/requirements.txt
+      - name: Check committed deliverables
+        run: python work/scripts/verify_submission.py
+      - name: Reproduce measured results
+        run: |
+          cp work/outputs/ctr_metrics.json /tmp/expected-ctr-metrics.json
+          python work/scripts/ctr_capstone.py
+          python work/scripts/verify_submission.py --expected /tmp/expected-ctr-metrics.json
+      - name: Execute every assignment notebook
+        run: python work/scripts/run_notebooks.py
+      - name: Verify paper is public
+        run: |
+          URL=$(cat submission/paper_url.txt)
+          curl --fail --location --retry 3 --output /tmp/capstone-paper.html "$URL"
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('/tmp/capstone-paper.html').read_text()
+          assert 'under-captures clicks' in p and 'https://flyrank.ai' in p
+          print('Public paper and required data credit verified.')
+          PY

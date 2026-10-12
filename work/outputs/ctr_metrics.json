@@ -1,0 +1,648 @@
+{
+  "status": "measured",
+  "lane": "CTR / Engagement Opportunity Scoring",
+  "seed": 42,
+  "data": {
+    "raw_rows": 30000,
+    "raw_clients": 32,
+    "raw_columns": 44,
+    "duplicate_content_rows": 0,
+    "excluded_below_500": 13274,
+    "excluded_position_after_volume": 0,
+    "eligible_rows": 16726,
+    "eligible_clients": 28,
+    "position_zero_raw": 1205,
+    "ctr_rounding_max_pp": 0.005000000000000782,
+    "sha256": "c43bdac4eccfa17fcd8a33974fe36f2c998c03a3ae3af8d80cf712abab5d6396",
+    "source_git_blob": "2f2f41fdb07868dc5599449ce9d817f58f3b2ae9",
+    "source_commit": "3b657dda40c1b668072a53371883fd4413d60f08",
+    "date_window": "Trailing 90-day snapshot; absolute export/end dates not present in the starter CSV. Warehouse dates are not assigned to this slice.",
+    "missing_pct_eligible": {
+      "word_count": 28.393,
+      "search_volume": 1.602,
+      "cpc": 1.602,
+      "competition": 1.602,
+      "main_intent": 1.262
+    }
+  },
+  "feature_columns": [
+    "avg_position",
+    "log_word_count",
+    "content_age_days",
+    "days_since_last_update",
+    "log_search_volume",
+    "competition",
+    "log_cpc",
+    "content_type",
+    "main_intent"
+  ],
+  "label": "100 * clicks_90d / impressions_90d; observed same-window CTR, not a future label",
+  "validation_design": "Disjoint client sets: train, validation for method selection, sealed test; no row-random fallback",
+  "splits": {
+    "train": {
+      "rows": 8483,
+      "clients": 17
+    },
+    "validation": {
+      "rows": 4330,
+      "clients": 5
+    },
+    "test": {
+      "rows": 3913,
+      "clients": 6
+    }
+  },
+  "selection_metric": "Validation impression-weighted CTR MAE; model selected before test",
+  "selected_method": "random_forest",
+  "validation": {
+    "position_baseline": {
+      "mae_pp": 0.22373394651813577,
+      "weighted_mae_pp": 0.210215452943218,
+      "rmse_pp": 0.35029303539752493,
+      "observed_ctr_pp": 0.3061110181731554,
+      "predicted_ctr_pp": 0.22455757037832594,
+      "n": 4330
+    },
+    "random_forest": {
+      "mae_pp": 0.22562678910502934,
+      "weighted_mae_pp": 0.20562474079862275,
+      "rmse_pp": 0.35693683586729846,
+      "observed_ctr_pp": 0.3061110181731554,
+      "predicted_ctr_pp": 0.21195639610223993,
+      "n": 4330
+    },
+    "hist_gradient_boosting": {
+      "mae_pp": 0.23074995092401163,
+      "weighted_mae_pp": 0.20790541538988766,
+      "rmse_pp": 0.3598031142060409,
+      "observed_ctr_pp": 0.3061110181731554,
+      "predicted_ctr_pp": 0.21385703978166234,
+      "n": 4330
+    }
+  },
+  "test": {
+    "position_baseline": {
+      "mae_pp": 0.2013234607495584,
+      "weighted_mae_pp": 0.2042125527753737,
+      "rmse_pp": 0.2870019252129417,
+      "observed_ctr_pp": 0.2850271116236826,
+      "predicted_ctr_pp": 0.33993391818137225,
+      "n": 3913
+    },
+    "random_forest": {
+      "mae_pp": 0.172949732444668,
+      "weighted_mae_pp": 0.17261499349796033,
+      "rmse_pp": 0.2742262173661863,
+      "observed_ctr_pp": 0.2850271116236826,
+      "predicted_ctr_pp": 0.26412428668911,
+      "n": 3913
+    },
+    "hist_gradient_boosting": {
+      "mae_pp": 0.17107748554758137,
+      "weighted_mae_pp": 0.17499545088407836,
+      "rmse_pp": 0.27630515157474955,
+      "observed_ctr_pp": 0.2850271116236826,
+      "predicted_ctr_pp": 0.27158764935305607,
+      "n": 3913
+    }
+  },
+  "bootstrap": {
+    "difference_selected_minus_baseline_pp": -0.031597559277413347,
+    "client_bootstrap_95pct_interval_pp": [
+      -0.044987970369798895,
+      -0.021518584760153066
+    ],
+    "replicates": 2000,
+    "clusters": 6,
+    "interpretation": "Exploratory client resampling with few clusters; negative favors selected method."
+  },
+  "subgroup_errors": [
+    {
+      "group_field": "position_band",
+      "group": "1\u20133",
+      "n": 67,
+      "selected_mae_pp": 0.1783250149291612,
+      "baseline_mae_pp": 0.32386668434031174
+    },
+    {
+      "group_field": "position_band",
+      "group": "4\u201310",
+      "n": 1477,
+      "selected_mae_pp": 0.19874348580363765,
+      "baseline_mae_pp": 0.20976723443123482
+    },
+    {
+      "group_field": "position_band",
+      "group": "11\u201320",
+      "n": 1209,
+      "selected_mae_pp": 0.16120455512718695,
+      "baseline_mae_pp": 0.21923149333962813
+    },
+    {
+      "group_field": "position_band",
+      "group": "21\u201350",
+      "n": 1096,
+      "selected_mae_pp": 0.09790440054905214,
+      "baseline_mae_pp": 0.11395144057591972
+    },
+    {
+      "group_field": "position_band",
+      "group": ">50",
+      "n": 64,
+      "selected_mae_pp": 0.10469993838564162,
+      "baseline_mae_pp": 0.09676466997894222
+    },
+    {
+      "group_field": "content_type",
+      "group": "comparison article",
+      "n": 70,
+      "selected_mae_pp": 0.2938891321912913,
+      "baseline_mae_pp": 0.3080413388244587
+    },
+    {
+      "group_field": "content_type",
+      "group": "keyword article",
+      "n": 3828,
+      "selected_mae_pp": 0.17160496516775492,
+      "baseline_mae_pp": 0.20333492475110254
+    }
+  ],
+  "volume_sensitivity": [
+    {
+      "minimum_impressions": 500,
+      "mae_pp": 0.172949732444668,
+      "weighted_mae_pp": 0.17261499349796033,
+      "rmse_pp": 0.2742262173661863,
+      "observed_ctr_pp": 0.2850271116236826,
+      "predicted_ctr_pp": 0.26412428668911,
+      "n": 3913
+    },
+    {
+      "minimum_impressions": 1000,
+      "mae_pp": 0.16867516430124266,
+      "weighted_mae_pp": 0.1723521651896176,
+      "rmse_pp": 0.2638503963845935,
+      "observed_ctr_pp": 0.2876103664042316,
+      "predicted_ctr_pp": 0.26472498719178306,
+      "n": 3145
+    },
+    {
+      "minimum_impressions": 3000,
+      "mae_pp": 0.17463289115204297,
+      "weighted_mae_pp": 0.17365361587347894,
+      "rmse_pp": 0.28688931632792475,
+      "observed_ctr_pp": 0.29618991640204934,
+      "predicted_ctr_pp": 0.26781202335817283,
+      "n": 1758
+    }
+  ],
+  "permutation_importance": [
+    {
+      "feature": "avg_position",
+      "weighted_mae_increase_pp": 0.02814934192005955,
+      "sd_pp": 0.003991335421524843
+    },
+    {
+      "feature": "log_word_count",
+      "weighted_mae_increase_pp": 0.00291035796817552,
+      "sd_pp": 0.0013992614914872083
+    },
+    {
+      "feature": "content_age_days",
+      "weighted_mae_increase_pp": 0.003784323270047035,
+      "sd_pp": 0.00426636199785737
+    },
+    {
+      "feature": "days_since_last_update",
+      "weighted_mae_increase_pp": -0.0005068331212053689,
+      "sd_pp": 0.000599616007847846
+    },
+    {
+      "feature": "log_search_volume",
+      "weighted_mae_increase_pp": 0.0015812189280552224,
+      "sd_pp": 0.0007525170944737827
+    },
+    {
+      "feature": "competition",
+      "weighted_mae_increase_pp": 0.0004980210488034875,
+      "sd_pp": 0.00021349643225686981
+    },
+    {
+      "feature": "log_cpc",
+      "weighted_mae_increase_pp": -0.0002103269675776287,
+      "sd_pp": 7.848792429403643e-05
+    },
+    {
+      "feature": "content_type",
+      "weighted_mae_increase_pp": 4.439201250594493e-07,
+      "sd_pp": 1.4919865205249265e-06
+    },
+    {
+      "feature": "main_intent",
+      "weighted_mae_increase_pp": 0.0010639940374783997,
+      "sd_pp": 0.00021715907713342123
+    }
+  ],
+  "calibration": [
+    {
+      "decile": 1,
+      "n": 392,
+      "predicted_ctr_pp": 0.07637896896115337,
+      "observed_ctr_pp": 0.07655120193707823
+    },
+    {
+      "decile": 2,
+      "n": 391,
+      "predicted_ctr_pp": 0.1341423588281915,
+      "observed_ctr_pp": 0.1950788677700562
+    },
+    {
+      "decile": 3,
+      "n": 391,
+      "predicted_ctr_pp": 0.16021305786325707,
+      "observed_ctr_pp": 0.21141633088297743
+    },
+    {
+      "decile": 4,
+      "n": 391,
+      "predicted_ctr_pp": 0.1890233870881484,
+      "observed_ctr_pp": 0.24581598354853634
+    },
+    {
+      "decile": 5,
+      "n": 392,
+      "predicted_ctr_pp": 0.2183703386531427,
+      "observed_ctr_pp": 0.2444014743616708
+    },
+    {
+      "decile": 6,
+      "n": 391,
+      "predicted_ctr_pp": 0.24756531166748533,
+      "observed_ctr_pp": 0.2805476577397744
+    },
+    {
+      "decile": 7,
+      "n": 391,
+      "predicted_ctr_pp": 0.2695740105378976,
+      "observed_ctr_pp": 0.29045528294987183
+    },
+    {
+      "decile": 8,
+      "n": 391,
+      "predicted_ctr_pp": 0.29833923327110584,
+      "observed_ctr_pp": 0.33654299314863373
+    },
+    {
+      "decile": 9,
+      "n": 391,
+      "predicted_ctr_pp": 0.34498367015819603,
+      "observed_ctr_pp": 0.3619345193486524
+    },
+    {
+      "decile": 10,
+      "n": 392,
+      "predicted_ctr_pp": 0.464810743119615,
+      "observed_ctr_pp": 0.4164395508557724
+    }
+  ],
+  "recommendations": [
+    {
+      "rank": 1,
+      "review_id": "Review 01",
+      "priority_score": 100.0,
+      "reference_gap_clicks": 1403.3,
+      "position_band": "4\u201310",
+      "action": "Metadata and intent review",
+      "reason_codes": [
+        "below_grouped_ctr_reference",
+        "visible_position_band",
+        "word_count_missing",
+        "recent_update_context"
+      ],
+      "evidence_level": "Higher measurement volume"
+    },
+    {
+      "rank": 2,
+      "review_id": "Review 02",
+      "priority_score": 99.97,
+      "reference_gap_clicks": 910.5,
+      "position_band": "1\u20133",
+      "action": "Metadata and intent review",
+      "reason_codes": [
+        "below_grouped_ctr_reference",
+        "visible_position_band",
+        "content_depth_context",
+        "recent_update_context"
+      ],
+      "evidence_level": "Higher measurement volume"
+    },
+    {
+      "rank": 3,
+      "review_id": "Review 03",
+      "priority_score": 99.95,
+      "reference_gap_clicks": 465.6,
+      "position_band": "1\u20133",
+      "action": "Metadata and intent review",
+      "reason_codes": [
+        "below_grouped_ctr_reference",
+        "visible_position_band",
+        "content_depth_context",
+        "recent_update_context"
+      ],
+      "evidence_level": "Higher measurement volume"
+    },
+    {
+      "rank": 4,
+      "review_id": "Review 04",
+      "priority_score": 99.92,
+      "reference_gap_clicks": 366.5,
+      "position_band": "4\u201310",
+      "action": "Metadata and intent review",
+      "reason_codes": [
+        "below_grouped_ctr_reference",
+        "visible_position_band",
+        "word_count_missing",
+        "recent_update_context"
+      ],
+      "evidence_level": "Higher measurement volume"
+    },
+    {
+      "rank": 5,
+      "review_id": "Review 05",
+      "priority_score": 99.9,
+      "reference_gap_clicks": 339.7,
+      "position_band": "4\u201310",
+      "action": "Metadata and intent review",
+      "reason_codes": [
+        "below_grouped_ctr_reference",
+        "visible_position_band",
+        "content_depth_context",
+        "recent_update_context"
+      ],
+      "evidence_level": "Higher measurement volume"
+    },
+    {
+      "rank": 6,
+      "review_id": "Review 06",
+      "priority_score": 99.87,
+      "reference_gap_clicks": 312.3,
+      "position_band": "4\u201310",
+      "action": "Metadata and intent review",
+      "reason_codes": [
+        "below_grouped_ctr_reference",
+        "visible_position_band",
+        "content_depth_context",
+        "recent_update_context"
+      ],
+      "evidence_level": "Higher measurement volume"
+    },
+    {
+      "rank": 7,
+      "review_id": "Review 07",
+      "priority_score": 99.85,
+      "reference_gap_clicks": 276.1,
+      "position_band": "1\u20133",
+      "action": "Metadata and intent review",
+      "reason_codes": [
+        "below_grouped_ctr_reference",
+        "visible_position_band",
+        "content_depth_context",
+        "recent_update_context"
+      ],
+      "evidence_level": "Higher measurement volume"
+    },
+    {
+      "rank": 8,
+      "review_id": "Review 08",
+      "priority_score": 99.82,
+      "reference_gap_clicks": 271.7,
+      "position_band": "4\u201310",
+      "action": "Metadata and intent review",
+      "reason_codes": [
+        "below_grouped_ctr_reference",
+        "visible_position_band",
+        "content_depth_context",
+        "recent_update_context"
+      ],
+      "evidence_level": "Higher measurement volume"
+    },
+    {
+      "rank": 9,
+      "review_id": "Review 09",
+      "priority_score": 99.8,
+      "reference_gap_clicks": 231.8,
+      "position_band": "21\u201350",
+      "action": "Visibility and content review",
+      "reason_codes": [
+        "below_grouped_ctr_reference",
+        "outside_page_two",
+        "content_depth_context",
+        "recent_update_context"
+      ],
+      "evidence_level": "Higher measurement volume"
+    },
+    {
+      "rank": 10,
+      "review_id": "Review 10",
+      "priority_score": 99.77,
+      "reference_gap_clicks": 230.7,
+      "position_band": "4\u201310",
+      "action": "Metadata and intent review",
+      "reason_codes": [
+        "below_grouped_ctr_reference",
+        "visible_position_band",
+        "content_depth_context",
+        "recent_update_context"
+      ],
+      "evidence_level": "Limited click evidence"
+    },
+    {
+      "rank": 11,
+      "review_id": "Review 11",
+      "priority_score": 99.74,
+      "reference_gap_clicks": 216.8,
+      "position_band": "4\u201310",
+      "action": "Metadata and intent review",
+      "reason_codes": [
+        "below_grouped_ctr_reference",
+        "visible_position_band",
+        "content_depth_context",
+        "recent_update_context"
+      ],
+      "evidence_level": "Limited click evidence"
+    },
+    {
+      "rank": 12,
+      "review_id": "Review 12",
+      "priority_score": 99.72,
+      "reference_gap_clicks": 211.6,
+      "position_band": "4\u201310",
+      "action": "Metadata and intent review",
+      "reason_codes": [
+        "below_grouped_ctr_reference",
+        "visible_position_band",
+        "content_depth_context",
+        "recent_update_context"
+      ],
+      "evidence_level": "Higher measurement volume"
+    },
+    {
+      "rank": 13,
+      "review_id": "Review 13",
+      "priority_score": 99.69,
+      "reference_gap_clicks": 191.6,
+      "position_band": "4\u201310",
+      "action": "Metadata and intent review",
+      "reason_codes": [
+        "below_grouped_ctr_reference",
+        "visible_position_band",
+        "word_count_missing",
+        "recent_update_context"
+      ],
+      "evidence_level": "Higher measurement volume"
+    },
+    {
+      "rank": 14,
+      "review_id": "Review 14",
+      "priority_score": 99.67,
+      "reference_gap_clicks": 187.7,
+      "position_band": "4\u201310",
+      "action": "Metadata and intent review",
+      "reason_codes": [
+        "below_grouped_ctr_reference",
+        "visible_position_band",
+        "content_depth_context",
+        "recent_update_context"
+      ],
+      "evidence_level": "Higher measurement volume"
+    },
+    {
+      "rank": 15,
+      "review_id": "Review 15",
+      "priority_score": 99.64,
+      "reference_gap_clicks": 186.9,
+      "position_band": "4\u201310",
+      "action": "Metadata and intent review",
+      "reason_codes": [
+        "below_grouped_ctr_reference",
+        "visible_position_band",
+        "content_depth_context",
+        "recent_update_context"
+      ],
+      "evidence_level": "Limited click evidence"
+    },
+    {
+      "rank": 16,
+      "review_id": "Review 16",
+      "priority_score": 99.62,
+      "reference_gap_clicks": 184.2,
+      "position_band": "4\u201310",
+      "action": "Metadata and intent review",
+      "reason_codes": [
+        "below_grouped_ctr_reference",
+        "visible_position_band",
+        "content_depth_context",
+        "recent_update_context"
+      ],
+      "evidence_level": "Higher measurement volume"
+    },
+    {
+      "rank": 17,
+      "review_id": "Review 17",
+      "priority_score": 99.59,
+      "reference_gap_clicks": 167.0,
+      "position_band": "4\u201310",
+      "action": "Metadata and intent review",
+      "reason_codes": [
+        "below_grouped_ctr_reference",
+        "visible_position_band",
+        "content_depth_context",
+        "recent_update_context"
+      ],
+      "evidence_level": "Higher measurement volume"
+    },
+    {
+      "rank": 18,
+      "review_id": "Review 18",
+      "priority_score": 99.57,
+      "reference_gap_clicks": 165.0,
+      "position_band": "4\u201310",
+      "action": "Metadata and intent review",
+      "reason_codes": [
+        "below_grouped_ctr_reference",
+        "visible_position_band",
+        "word_count_missing",
+        "recent_update_context"
+      ],
+      "evidence_level": "Higher measurement volume"
+    },
+    {
+      "rank": 19,
+      "review_id": "Review 19",
+      "priority_score": 99.54,
+      "reference_gap_clicks": 161.3,
+      "position_band": "4\u201310",
+      "action": "Metadata and intent review",
+      "reason_codes": [
+        "below_grouped_ctr_reference",
+        "visible_position_band",
+        "word_count_missing",
+        "recent_update_context"
+      ],
+      "evidence_level": "Higher measurement volume"
+    },
+    {
+      "rank": 20,
+      "review_id": "Review 20",
+      "priority_score": 99.51,
+      "reference_gap_clicks": 157.1,
+      "position_band": "4\u201310",
+      "action": "Metadata and intent review",
+      "reason_codes": [
+        "below_grouped_ctr_reference",
+        "visible_position_band",
+        "word_count_missing",
+        "recent_update_context"
+      ],
+      "evidence_level": "Higher measurement volume"
+    }
+  ],
+  "wrong_cases": [
+    {
+      "diagnostic_case": "A",
+      "position_band": "11\u201320",
+      "observed_ctr_pp": 5.426,
+      "predicted_ctr_pp": 0.275,
+      "explanation": "Large residual on an individual page; query mix, brand demand and snippet intent are unmeasured."
+    },
+    {
+      "diagnostic_case": "B",
+      "position_band": "1\u20133",
+      "observed_ctr_pp": 5.194,
+      "predicted_ctr_pp": 0.492,
+      "explanation": "Large residual on an individual page; query mix, brand demand and snippet intent are unmeasured."
+    },
+    {
+      "diagnostic_case": "C",
+      "position_band": "4\u201310",
+      "observed_ctr_pp": 2.541,
+      "predicted_ctr_pp": 0.274,
+      "explanation": "Large residual on an individual page; query mix, brand demand and snippet intent are unmeasured."
+    }
+  ],
+  "versions": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "sklearn": "1.8.0"
+  },
+  "leakage_checks": {
+    "client_overlap": 0,
+    "content_overlap": 0,
+    "target_or_identifier_features": 0,
+    "preprocessing_fit_on_train_only": true,
+    "winner_selected_on_validation_only": true,
+    "future_forecast_claim": false
+  },
+  "interpretation": "Reference click gaps are review heuristics, not recoverable-click estimates or causal effects."
+}
