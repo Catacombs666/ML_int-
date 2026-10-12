@@ -45,3 +45,7 @@ All ten notebooks were executed top to bottom; completed outputs are committed.
 Observed reference shortfalls support human review. They do not measure recoverable clicks, future CTR, or causal refresh impact. The original solar-themed framing and generic dummy drafts are retained in repository history; the current assignment sequence is aligned to real FlyRank data.
 
 Built on the FlyRank ML Internship dataset — https://flyrank.ai.
+
+## Author and remaining access requirement
+
+Author: **Majhabul Hoque**. The guided Week 1 and Week 2 exercises and all ten assignment/capstone notebooks are completed with outputs. The separate full-warehouse tutorial (`notebooks/03_working_with_the_full_release.ipynb`) remains unexecuted pending authorized Hugging Face access; no warehouse execution is claimed.
