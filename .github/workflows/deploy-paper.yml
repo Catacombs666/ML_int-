@@ -27,3 +27,34 @@ jobs:
       - name: Deploy paper
         id: deployment
         uses: actions/deploy-pages@v4
+      - name: Verify public paper and charts
+        env:
+          PAPER_URL: ${{ steps.deployment.outputs.page_url }}
+        run: |
+          python - <<'PY'
+          import os, time
+          from urllib.request import urlopen
+          from urllib.parse import urljoin
+          from html.parser import HTMLParser
+          url=os.environ['PAPER_URL']
+          for attempt in range(6):
+              try:
+                  with urlopen(url, timeout=30) as response:
+                      assert response.status == 200
+                      page=response.read().decode()
+                  break
+              except Exception:
+                  if attempt == 5: raise
+                  time.sleep(10)
+          assert 'under-captures clicks' in page and 'https://flyrank.ai' in page
+          class Images(HTMLParser):
+              def __init__(self): super().__init__(); self.paths=[]
+              def handle_starttag(self, tag, attrs):
+                  if tag == 'img': self.paths.append(dict(attrs)['src'])
+          parser=Images(); parser.feed(page)
+          assert len(parser.paths) == 4
+          for path in parser.paths:
+              with urlopen(urljoin(url,path), timeout=30) as response:
+                  assert response.status == 200 and b'<svg' in response.read()
+          print('Verified public paper and all four charts:', url)
+          PY
